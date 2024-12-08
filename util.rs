@@ -85,9 +85,9 @@ impl ops::IndexMut<usize> for Vector {
     }
 }
 
-pub fn vector_distance(v1: Vector, v2: Vector) {
+pub fn vector_distance(v1: &Vector, v2: &Vector) -> f64 {
     assert_eq!(v1.dimensions, v2.dimensions);
-    let mut s: f64 = 0;
+    let mut s: f64 = 0.0;
     for i in 0..v1.dimensions {
         s += (v1[i] - v2[i]) * (v1[i] - v2[i]);
     }
@@ -176,7 +176,7 @@ impl ops::Add for Matrix {
         assert_eq!(self.height, rhs.height);
 
         let mut v: Vec<Vec<f64>> = Vec::new();
-        for i in 0..self.height {
+        for _i in 0..self.height {
             v.push(vec![0.0; self.width]);
         }
 
@@ -198,7 +198,7 @@ impl ops::Sub for Matrix {
         assert_eq!(self.height, rhs.height);
 
         let mut v: Vec<Vec<f64>> = Vec::new();
-        for i in 0..self.height {
+        for _i in 0..self.height {
             v.push(vec![0.0; self.width]);
         }
         for i in 0..self.height {
