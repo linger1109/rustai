@@ -15,7 +15,7 @@ pub struct KMeansClustering {
             cluster_centroids.push(Vector.new_from_vec(data[i]));
         }
 
-        let mut min_ds: f64 = 1000; // minimum change of distance of centroids from prev iteration
+        let mut max_ds: f64 = 1000; // maximum change of distance of centroids from prev iteration
         
         // scratch spaces; defining here to avoid continuously allot'ing memory
         let mut allocated_clusters: Vec<usize> = vec![0; data.len()];
@@ -63,11 +63,11 @@ pub struct KMeansClustering {
             // copy values over, and compute the difference on the way
             for i in 0..clusters {
                 let mut ds = vector_distance(cluster_centroids[i], cluster_datasum[i]);
-                min_ds = cmp::min(min_ds, ds);
+                max_ds = cmp::min(max_ds, ds);
                 cluster_centroids = cluster_datasum[i];
             }
 
-            if min_ds <= THRESHOLD_CHANGE {
+            if max_ds <= THRESHOLD_CHANGE {
                 break;
             }
         }
