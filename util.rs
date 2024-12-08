@@ -85,6 +85,16 @@ impl ops::IndexMut<usize> for Vector {
     }
 }
 
+pub fn vector_distance(v1: Vector, v2: Vector) {
+    assert_eq!(v1.dimensions, v2.dimensions);
+    let mut s: f64 = 0;
+    for i in 0..v1.dimensions {
+        s += (v1[i] - v2[i]) * (v1[i] - v2[i]);
+    }
+
+    s.sqrt()
+}
+
 #[derive(Debug, Clone)]
 pub struct Matrix {
     width: usize,
