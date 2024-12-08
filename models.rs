@@ -73,7 +73,7 @@ impl KMeansClustering {
             // copy values over, and compute the difference on the way
             for i in 0..cluster_count {
                 let mut ds = vector_distance(cluster_centroids[i], cluster_datasum[i]);
-                max_ds = cmp::min(max_ds, ds);
+                max_ds = cmp::max(max_ds, ds);
                 cluster_centroids = cluster_datasum[i];
             }
 
