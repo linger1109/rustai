@@ -1,12 +1,16 @@
+// Import the Data Structures created in util.rs
 use crate::util::{Vector, Matrix, DataPoint};
 
-
+// Linear Regression Struct
 pub struct LinearRegression {
   input_dimensions: usize,
   output_dimensions: usize,
   weights: Vector
 }
+
 impl LinearRegression {
+  // Constructor for Linear Regression from dimensions
+  // Parameters: Input Dim and Output Dim both being usize
   pub fn new_from_dims(input_dimensions: usize, output_dimensions: usize) -> Self {
       LinearRegression {
           input_dimensions,
@@ -14,6 +18,9 @@ impl LinearRegression {
           weights: Vector::new_from_dims(input_dimensions + 1, 0.0)
       }
   }
+
+  // Constructor for Linear Regression from a DataPoint Data Structure
+  // Parameters: A DataPoint Structure
   pub fn new_from_points(points: &DataPoint) -> Self {
    Self {
        input_dimensions: points.get_dimension().0,
@@ -21,7 +28,10 @@ impl LinearRegression {
        weights: Vector::new_from_dims(points.get_dimension().0 + 1, 0.0)
    }
   }
-  pub fn fit(&mut self, training_data: &[DataPoint]) {// training data is a slice of datapoints
+
+  // Training function to fit the linear regression model
+  // Parameters: A slice of DataPoint Structures
+  pub fn fit(&mut self, training_data: &[DataPoint]) { // training data is given as a slice of datapoints
       // step configs we can change these depending on whatever works best. Also might want to put these in the input parameter
       let learning_rate = 0.001;
       let iterations = 100000;
@@ -34,7 +44,7 @@ impl LinearRegression {
               }
           }
       }
-    
+      
       let n = valid_data.len();
       if n == 0 {
           return;
@@ -82,7 +92,11 @@ impl LinearRegression {
           }
       }
   }
-  pub fn eval(&self, points: &[DataPoint]) -> f64 { // Finding the Mean Squared Error from the given points and the plotted Linear Regression Function
+
+  // Evaluating the fitted model given a slice of DataPoint as a testing data
+  // Parameters: A slice of DataPoint Structures
+  pub fn eval(&self, points: &[DataPoint]) -> f64 { 
+       // Finding the Mean Squared Error from the given points and the plotted Linear Regression Function
        let mut error:f64 = 0.0;
 
        for i in 0..self.input_dimensions {
@@ -95,15 +109,20 @@ impl LinearRegression {
            error += diff.abs() * diff.abs();
        }
 
-
        error
   }
+
+  // Get Function for retrieving coefficients
   pub fn get_coefficients(&self) -> Vec<f64> {
       self.weights.as_vec()[1..].to_vec()
   }
+
+  // Get Function for retrieving intercepts
   pub fn get_intercept(&self) -> f64 {
       self.weights[0]
   }
+
+  // Get Function for retrieving dimensions
   pub fn get_dimensions(&self) -> (usize, usize) {
        (self.input_dimensions, self.output_dimensions)
   }
