@@ -135,7 +135,6 @@ impl Matrix {
 
         Self {width: w, height: h, values: vals}
 
-        // }
     }
     
     // Returns matrix dimensions
@@ -284,5 +283,3 @@ impl DataPoint {
         (self.input_dimensions, self.output_dimensions)
     }
 }
-
-// TODO: make presence of default value more consistent (DataPoint)
