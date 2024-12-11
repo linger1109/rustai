@@ -31,18 +31,18 @@ Include `mod util` at the beginning of any file to have access to all of the uti
 Include `mod unsupervised` to have access to the unsupervised algorithm.
 **unsupervised module**
 * `KMeansClustering` struct: struct for K Means Clustering Algorithm.
- * constructor: `new(dimensions: usize, cluster_count: usize)`. Consturcts a new `struct` that will accept data points with `dimensions` dimensions and wil cluster data into `cluster_count` clusters.
- * `fit(data: Vec<util::Vector>)`: Fits the model using `data`. `data` is a Vec containing data points, where each data point is `util::Vector`. Each `util::Vector` must be of `self.dimensions` dimensions.
- * `eval(data: util::Vector) -> usize`: Evaluate the data point `data` according to the trained model. `data` is `self.dimensions`-dimension data point. Returns the id of the cluster that `data` is placed into.
- * `eval_batch(data: Vec<util::Vector>) -> Vec<usize>`: Evaluate multiple data points supplied by `Vec<util::Vector> data`. Returns `Vec<usize>`, parallel to `data`, wherc each element contains the id of the cluster that `data` is placed into.e
+    * constructor: `new(dimensions: usize, cluster_count: usize)`. Consturcts a new `struct` that will accept data points with `dimensions` dimensions and wil cluster data into `cluster_count` clusters.
+    * `fit(data: Vec<util::Vector>)`: Fits the model using `data`. `data` is a Vec containing data points, where each data point is `util::Vector`. Each `util::Vector` must be of `self.dimensions` dimensions.
+    * `eval(data: util::Vector) -> usize`: Evaluate the data point `data` according to the trained model. `data` is `self.dimensions`-dimension data point. Returns the id of the cluster that `data` is placed into.
+    * `eval_batch(data: Vec<util::Vector>) -> Vec<usize>`: Evaluate multiple data points supplied by `Vec<util::Vector> data`. Returns `Vec<usize>`, parallel to `data`, wherc each element contains the id of the cluster that `data` is placed into.e
  
 Include `mod supervised` to have access to the supervised algorithm.
  **supervised module**
 * `LinearRegression` struct: struct for Linear Regression Algorithm
- * constructor option 1: `new_from_dims(input_dimensions: usize, output_dimensions: usize)` which will construct a new `struct` that will accept two `usize` variables to indicate input and output dimensions 
- * constructor option 2: `new_from_points(points: &DataPoint)` which will construct a new `struct` by accepting a sample `DataPoint`.
- * `fit(training_data: &[DataPoint])`: This function takes a slice of `DataPoint` by reference to read each point and fit a linear regression model
- * `eval(points: &[DataPoint])`: This function takes a slice of `DataPoint` by reference to evaluate the linear regression model through the given set of `DataPoint`. It outputs the calculated Mean Squared Error.
- * `get_coefficients()`: Returns the coefficients of the fitted model
- * `get_intercept()`: Returns the intercepts of the fitted model
- * `get_dimensions()`: Returns the dimensions of the input and output `DataPoint`
+    * constructor option 1: `new_from_dims(input_dimensions: usize, output_dimensions: usize)` which will construct a new `struct` that will accept two `usize` variables to indicate input and output dimensions 
+    * constructor option 2: `new_from_points(points: &DataPoint)` which will construct a new `struct` by accepting a sample `DataPoint`.
+    * `fit(training_data: &[DataPoint])`: This function takes a slice of `DataPoint` by reference to read each point and fit a linear regression model
+    * `eval(points: &[DataPoint])`: This function takes a slice of `DataPoint` by reference to evaluate the linear regression model through the given set of `DataPoint`. It outputs the calculated Mean Squared Error.
+    * `get_coefficients()`: Returns the coefficients of the fitted model
+    * `get_intercept()`: Returns the intercepts of the fitted model
+    * `get_dimensions()`: Returns the dimensions of the input and output `DataPoint`
