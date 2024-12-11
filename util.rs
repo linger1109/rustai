@@ -1,13 +1,14 @@
 use std::ops;
 use std::ops::{Index, IndexMut};
-
+// Definiton of a 'Vector' structure with various useful operations for training data
 #[derive(Debug, Clone)]
 pub struct Vector {
-    dimensions: usize,
+    dimensions: usize, 
     values: Vec<f64>
 }
 
 impl Vector {
+    // Constructor to create a Vector with specified dimensions, with a default starting value 
     pub fn new_from_dims(dimensions: usize, default_val: f64) -> Self {
         let mut currentVals: Vec<f64> = Vec::new();
         for _i in 0..dimensions {
@@ -19,23 +20,23 @@ impl Vector {
             values: currentVals
         }
     }
-
+    // Constructor to create a Vector from an inputted Vec<f64>. Copies inputted vector to values in self
     pub fn new_from_vec(fromVec: Vec<f64>) -> Self {
         Self {
             dimensions: fromVec.len(),
             values: fromVec
         }
     }
-
+    // Returns Vector dimension as a usize
     pub fn get_dimension(&self) -> usize {
         return self.dimensions;
     }
-
+    // Returns a clone of self.values as a Vector<f64>
     pub fn as_vec(&self) -> Vec<f64> {
         return self.values.clone(); // check if clone is necessary
     }
 }
-
+// Addition operation for Vector
 impl ops::Add for Vector {
     type Output = Vector;
     fn add(self, rhs: Vector) -> Vector {
@@ -47,7 +48,7 @@ impl ops::Add for Vector {
         return Vector::new_from_vec(v);
     }
 }
-
+// Subtraction operation for Vector
 impl ops::Sub for Vector {
     type Output = Vector;
     fn sub(self, rhs: Vector) -> Vector {
@@ -59,7 +60,7 @@ impl ops::Sub for Vector {
         return Vector::new_from_vec(v);
     }
 }
-
+// Dot Product implementation for Vector
 impl ops::Mul for Vector {
     type Output = f64;
     fn mul(self, rhs: Vector) -> f64 {
@@ -71,20 +72,20 @@ impl ops::Mul for Vector {
         return result;
     }
 }
-
+// Indexing operation for vector. Allows for immutable access
 impl ops::Index<usize> for Vector {
     type Output = f64;
     fn index (&self, i: usize) -> &f64 {
         &self.values[i]
     }
 }
-
+// Indexing operation for vector. Allows for mutable access
 impl ops::IndexMut<usize> for Vector {
     fn index_mut (&mut self, i: usize) -> &mut f64 {
         &mut self.values[i]
     }
 }
-
+// Returns the distance between two vectors (Euclidean)
 pub fn vector_distance(v1: &Vector, v2: &Vector) -> f64 {
     assert_eq!(v1.dimensions, v2.dimensions);
     let mut s: f64 = 0.0;
@@ -94,7 +95,7 @@ pub fn vector_distance(v1: &Vector, v2: &Vector) -> f64 {
 
     s.sqrt()
 }
-
+// Defines a Matrix structure. Useful for multidimensional data
 #[derive(Debug, Clone)]
 pub struct Matrix {
     width: usize,
@@ -103,6 +104,7 @@ pub struct Matrix {
 }
 
 impl Matrix {
+    // Constructor to create a [height x width] matrix with a default value
     pub fn new_from_dims(height: usize, width: usize, default_val: f64) -> Self {
         // initialise values, defaults to zero V
         let mut v: Vec<Vector> = Vec::new();
@@ -111,7 +113,7 @@ impl Matrix {
         }
         Self {width: width, height: height, values: v}
     }
-
+    // Constructor to create a matrix from a mulitidimensional vec
     pub fn new_from_vec(v: Vec<Vec<f64>>) -> Self {
         // initialises Matrix from Vec<Vec>.
         // consumes the Vec<Vec> given.
@@ -135,15 +137,14 @@ impl Matrix {
 
         // }
     }
-
-    // maybe add a constructor that makes matrix from vec<Vector<f64>>
-
-    pub fn get_dimensions(&self) -> (usize, usize) { (self.height, self.width) }
-        
-    pub fn get_width(&self) -> usize { self.width }
     
+    // Returns matrix dimensions
+    pub fn get_dimensions(&self) -> (usize, usize) { (self.height, self.width) }
+    // Returns matrix width
+    pub fn get_width(&self) -> usize { self.width }
+    // Returns matrix height
     pub fn get_height(&self) -> usize { self.height }
-
+    // Computes the transpose of a matrix
     pub fn T(&self) -> Matrix {
         let mut res: Matrix = Matrix::new_from_dims(self.width, self.height, 0.0);
         for i in 0..self.height {
@@ -154,21 +155,21 @@ impl Matrix {
         res
     }
 }
-
+// Index operator for immutable access
 impl Index<usize> for Matrix {
     type Output = Vector;
     fn index(&self, index: usize) -> &Vector {
         &self.values[index]
     }
 }
-
+// Index operator for mutable access
 impl IndexMut<usize> for Matrix {
     fn index_mut(&mut self, index: usize) -> &mut Vector {
         &mut self.values[index]
     }
 }
 
-
+// Addition operator for matrix
 impl ops::Add for Matrix {
     type Output = Matrix;
     fn add(self, rhs: Matrix) -> Matrix {
@@ -190,7 +191,7 @@ impl ops::Add for Matrix {
 
     }
 }
-
+// Subtraction operator for matrix
 impl ops::Sub for Matrix {
     type Output = Matrix;
     fn sub(self, rhs: Matrix) -> Matrix {
@@ -211,7 +212,7 @@ impl ops::Sub for Matrix {
 
     }
 }
-
+// Operator for matrix multiplication
 impl ops::Mul for Matrix {
     type Output = Matrix;
     fn mul(self, rhs: Matrix) -> Matrix {
@@ -237,7 +238,7 @@ impl ops::Mul for Matrix {
 }
 
 
-
+// Definition of a DataPoint structure for storing input/output pairs. Useful for training data
 #[derive(Debug, Clone)]
 pub struct DataPoint {
     input_dimensions: usize,
@@ -246,6 +247,7 @@ pub struct DataPoint {
     output: Option<Vector>,
 }
 impl DataPoint {
+    // Creates DataPoint with specified input_dimensions and output_dimensions.
     pub fn new_from_dims(input_dimensions: usize, output_dimensions: usize) -> Self {
         Self {
             input_dimensions,
@@ -254,6 +256,7 @@ impl DataPoint {
             output: None
         }
     }
+    // Creates DataPoint from a Vector for input and an Option<Vector> for output
     pub fn new_from_vec(input: Vector, output: Option<Vector>) -> Self {
         let input_dimensions: usize = input.get_dimension();
         let output_dimensions: usize = match &output {
@@ -267,15 +270,16 @@ impl DataPoint {
             output
         }
     }
-
+    // Returns a DataPoint's input as a Vector 
     pub fn get_input(&self) -> Vector {
         self.input.clone()
     }
-
+    // Returns a DataPoint's output as Option<Vector>. Will need to unwrap to access
     pub fn get_output(&self) -> Option<Vector> {
         self.output.clone() 
     }
-    
+    // Returns dimensions as a tuple
+    // 0th index is input dimension 1st index is output dimension
     pub fn get_dimension(&self) -> (usize, usize) {
         (self.input_dimensions, self.output_dimensions)
     }
