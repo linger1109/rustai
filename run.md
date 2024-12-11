@@ -1,7 +1,7 @@
 # How to run
 **1. Downloading the project**
 * If `git` is installed on your system, run `git clone https://github.com/linger1109/skrusty-learn.git` on your Terminal app.
-* Otherwise, hit 'Code⇢Download ZIP' from the [project main page](https://github.com/linger1109/skrusty-learn). Unzip the archive, and open Terminal from there.
+* Otherwise, hit 'Code⇢Download ZIP' from the [project main page](https://github.com/linger1109/skrusty-learn). Make sure you are grabbing the code from the main branch. Unzip the archive, and open Terminal from there.
 
 **2. Code using the library**
 Open `main.rs`. Import the library and code as you want. Code documentation is given below. Refer to `main1.rs`, `main2.rs`, `main3.rs` for example code files.
@@ -28,6 +28,7 @@ Include `mod util` at the beginning of any file to have access to all of the uti
     * constructor: `new_from_dims(input_dimensions: usize, output_dimensions: usize) -> Self`: Makes a new DataPoint with specified `input_dimension` and `output_dimension`, with a default input Vector of size `input_dimensions` with default value of 0.0 and a default output of `None`
     *  constructor: `new_from_vec(input: Vector, output: Option<Vector>) -> Self`: Creates a Datapoint setting the `self.input` as the input Vector
     
+Include `mod unsupervised` to have access to the unsupervised algorithm.
 **unsupervised module**
 * `KMeansClustering` struct: struct for K Means Clustering Algorithm.
  * constructor: `new(dimensions: usize, cluster_count: usize)`. Consturcts a new `struct` that will accept data points with `dimensions` dimensions and wil cluster data into `cluster_count` clusters.
@@ -35,6 +36,7 @@ Include `mod util` at the beginning of any file to have access to all of the uti
  * `eval(data: util::Vector) -> usize`: Evaluate the data point `data` according to the trained model. `data` is `self.dimensions`-dimension data point. Returns the id of the cluster that `data` is placed into.
  * `eval_batch(data: Vec<util::Vector>) -> Vec<usize>`: Evaluate multiple data points supplied by `Vec<util::Vector> data`. Returns `Vec<usize>`, parallel to `data`, wherc each element contains the id of the cluster that `data` is placed into.e
  
+Include `mod supervised` to have access to the supervised algorithm.
  **supervised module**
 * `LinearRegression` struct: struct for Linear Regression Algorithm
  * constructor option 1: `new_from_dims(input_dimensions: usize, output_dimensions: usize)` which will construct a new `struct` that will accept two `usize` variables to indicate input and output dimensions 
