@@ -267,6 +267,18 @@ impl DataPoint {
             output
         }
     }
+
+    pub fn get_input(&self) -> Vector {
+        self.input.clone()
+    }
+
+    pub fn get_output(&self) -> Option<Vector> {
+        self.output.clone() 
+    }
+    
+    pub fn get_dimension(&self) -> (usize, usize) {
+        (self.input_dimensions, self.output_dimensions)
+    }
 }
 
 // TODO: make presence of default value more consistent (DataPoint)
