@@ -23,7 +23,7 @@ Include `mod util` at the beginning of any file to have access to all of the uti
     * constructor: `new_from_dims(height: usize, width: usize, default_val: f64)`. Makes a new matrix of height `height`, width `width`, where `default_val` is the value in every matrix entry
     * constructor: `new_from_vec(Vec<Vec<f64>>)`. Makes a new matrix from the 2D `Vec` of `f64`.
     * member function `T(&self) -> Matrix`: returns the transposed matrix.
-    * overloaded operators: `+` (matrix elementwise addition), `-` (matrix elementwise subtraction), `*` (matrix multiplication), `Index<usize>` (returns the passed in row of the matrix as a `Vector` object), `IndexMut<usize>` (same as `Index<usize>`, but is mutable).
+    * overloaded operators: `+` (matrix elementwise addition), `-` (matrix elementwise subtraction), `Index<usize>` (returns the passed in row of the matrix as a `Vector` object), `IndexMut<usize>` (same as `Index<usize>`, but is mutable).
 * `DataPoint` struct: our custom structure to hold an input `Vector`, with an optional output (type `Option<Vector>`). This is useful for model training.
     * constructor: `new_from_dims(input_dimensions: usize, output_dimensions: usize) -> Self`: Makes a new DataPoint with specified `input_dimension` and `output_dimension`, with a default input Vector of size `input_dimensions` with default value of 0.0 and a default output of `None`
     *  constructor: `new_from_vec(input: Vector, output: Option<Vector>) -> Self`: Creates a Datapoint setting the `self.input` as the input Vector
