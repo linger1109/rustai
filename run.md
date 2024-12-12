@@ -7,7 +7,7 @@
 Open `main.rs`. Import the library and code as you want. Code documentation is given below. Refer to `main1.rs`, `main2.rs`, `main3.rs` for example code files.
 
 **3. Execute**
-Type `cargo run` to execute. Note that `main.rs` is empty, so doing this will not do anything at first. However, the library does work and you can use all of the custom objects / machine learning models that we have implemented. For demonstrations, you can copy and paste the entirety of the contents of any one of the three `main1.rs`, `main2.rs`, or `main3.rs` files into the `main.rs` file, and then do `cargo run` to see the output of that demo.
+Type `cargo init` to initialize. Then type `cargo run` to execute. Note that `main.rs` is empty, so doing this will not do anything at first. However, the library does work and you can use all of the custom objects / machine learning models / functions that we have implemented. For demonstrations, you can copy and paste the entirety of the contents of any one of the three `main1.rs`, `main2.rs`, or `main3.rs` files into the `main.rs` file, and then do `cargo run` to see the output of that demo.
 
 # Library Documentation
 Note that this documentation is not comprehensive! We have some more functionality that is not covered here, however, this covers many of the basics for interfacing with and using our library.
