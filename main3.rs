@@ -93,8 +93,6 @@ fn main() {
 
     // showing off some of the operators we have overloaded
     println!("mat1 + mat2: {:?}", mat1.clone() + mat2.clone());
-    println!("mat1 * mat3: {:?}", mat1.clone() * mat3.clone());
-
 
     println!("=====================");   
 }
