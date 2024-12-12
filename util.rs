@@ -211,31 +211,6 @@ impl ops::Sub for Matrix {
 
     }
 }
-// Operator for matrix multiplication
-impl ops::Mul for Matrix {
-    type Output = Matrix;
-    fn mul(self, rhs: Matrix) -> Matrix {
-        assert_eq!(self.width, rhs.height);
-        //let mut v = vec![Vector::new_from_dims(self.height, 0); rhs.width];
-        let mut v: Vec<Vec<f64>> = Vec::new();
-        for _i in 0..self.width {
-            v.push(vec![0.0; self.height]);
-        }
-        let transposed_rhs = rhs.T();
-        for i in 0..self.height {
-            for j in 0..transposed_rhs.height {
-                let mut tmp: f64 = 0.0;
-                for _k in 0..self.width {
-                    tmp += self.values[i][j] * transposed_rhs.values[i][j];
-                }
-                v[i][j] = tmp;
-            }
-        }
-
-        Matrix::new_from_vec(v)
-    }
-}
-
 
 // Definition of a DataPoint structure for storing input/output pairs. Useful for training data
 #[derive(Debug, Clone)]
